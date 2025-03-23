@@ -1,0 +1,29 @@
+{% extends 'static/static.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Sentiment Distribution</h1> <h1><a href="{% url 'index' %}">Back To HomePage</a></h1>
+    
+    <div>
+        <h3>Review Sentiment Data</h3>
+        <!-- Show review details -->
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <strong>{{ review.text }}</strong> - 
+                    {% if review.sentiment == 'positive' %}
+                        <span style="color: green;">Positive</span>
+                    {% elif review.sentiment == 'negative' %}
+                        <span style="color: red;">Negative</span>
+                    {% else %}
+                        <span style="color: gray;">Neutral</span>
+                    {% endif %}
+                    <br>
+                    <small>Reviewed on: {{ review.created_at }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
